@@ -3,23 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sorteio de Nomes</title>
+<title>Sorteio Master Liga</title>
 <style>
     body {
         font-family: Arial, sans-serif;
         text-align: center;
     }
+    li {
+list-style: none;
+	}
 </style>
 </head>
 <body>
 <h1>Sorteio Master Liga</h1>
+<p>Insira a senha para habilitar o sorteio:</p>
+<input type="password" id="senha" oninput="verificarSenha()">
+<br><br>
+<p>Lista de participantes:</p>
+<ul id="listaParticipantes">
+    <li>Zorats</li>
+    <li>Xandys</li>
+    <li>Bálsamo</li>
+    <li>Nil</li>
+    <li>Dolphs</li>
+</ul>
+<br>
 <p>Clique no botão para sortear a ordem de escolha de times:</p>
-<button onclick="sortearOrdem()">Sortear</button>
+<button onclick="sortearOrdem()" id="botaoSortear" disabled>Sortear</button>
 <p id="nomesSorteados"></p>
 
 <script>
+function verificarSenha() {
+    var senhaInserida = document.getElementById("senha").value;
+    var botaoSortear = document.getElementById("botaoSortear");
+    
+    if (senhaInserida === "cr7") {
+        botaoSortear.disabled = false;
+    } else {
+        botaoSortear.disabled = true;
+    }
+}
+
 function sortearOrdem() {
-    var nomes = ["Zorats", "Xandys", "Bálsamo", "Nil", "Dolphs"];
+    var participantes = document.getElementById("listaParticipantes").getElementsByTagName("li");
+    var nomes = [];
+    for (var i = 0; i < participantes.length; i++) {
+        nomes.push(participantes[i].innerText);
+    }
     var nomesEmbaralhados = embaralhar(nomes);
     document.getElementById("nomesSorteados").innerText = "Ordem dos nomes sorteados: " + nomesEmbaralhados.join(", ");
 }
