@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorteio de Nomes</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<h1>Sorteio Master Liga</h1>
+<p>Clique no botão para sortear a ordem de escolha de times:</p>
+<button onclick="sortearOrdem()">Sortear</button>
+<p id="nomesSorteados"></p>
+
+<script>
+function sortearOrdem() {
+    var nomes = ["Zorats", "Xandys", "Bálsamo", "Nil", "Dolphs"];
+    var nomesEmbaralhados = embaralhar(nomes);
+    document.getElementById("nomesSorteados").innerText = "Ordem dos nomes sorteados: " + nomesEmbaralhados.join(", ");
+}
+
+function embaralhar(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // Enquanto ainda existem elementos para embaralhar
+    while (0 !== currentIndex) {
+  
+        // Escolha um elemento restante
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+  
+        // E troque com o elemento atual
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+}
+</script>
+</body>
+</html>
